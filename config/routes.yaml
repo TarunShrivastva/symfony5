@@ -1,3 +1,20 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+list:
+    path: /list/{page<\d+>}
+    controller: App\Controller\HomeController::list
+    condition:   
+    # requirements:
+    #     page: '\d+'
+    methods:    POST
+
+list-slug:
+    path: /list-slug/{slug}
+    controller: App\Controller\HomeController::listSlug
+    methods:    GET
+
+data:
+    path: /data/{id}/{value}
+    controller: App\Controller\HomeController::data
+    methods:    GET
