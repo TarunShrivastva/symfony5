@@ -1,0 +1,20 @@
+<ol>
+	<!-- Single Comment Area -->
+	{% for comment in comments %}
+        <li class="single_comment_area">
+            <!-- Comment Content -->
+            <div class="comment-content d-flex">
+                <!-- Comment Author -->
+                <div class="comment-author">
+                    <img src={{ asset('img/bg-img/32.jpg') }} alt="author">
+                </div>
+                <!-- Comment Meta -->
+                <div class="comment-meta">
+                    {# <a href="#" class="post-author">Christian Williams</a> #}
+                    <a href="#" class="post-date">{{ comment.getUpdatedAt()|date("F jS \\a\\t g:ia")  }}</a>
+                    <p>{{ comment.getComment() }}</p>
+                </div>
+            </div>
+        </li>
+    {% endfor %}
+</ol>

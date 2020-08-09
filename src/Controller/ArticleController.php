@@ -4,22 +4,22 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Comment;
+use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Contracts\Translation\TranslatorInterface;
-
-use Symfony\Component\Form\FormInterface;
+// use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+// use Symfony\Component\Form\Extension\Core\Type\TextType;
+// use Doctrine\ORM\EntityManagerInterface;
+// use Doctrine\ORM\EntityRepository;
+// use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+// use Symfony\Contracts\Translation\TranslatorInterface;
+// use Symfony\Component\Form\FormInterface;
 
 
 class ArticleController extends AbstractController
@@ -115,6 +115,20 @@ class ArticleController extends AbstractController
 
         return $this->render('article/form.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route(
+     *      "/comment-list/{id}", 
+     *      name="comment-list"),
+     */
+    public function commentList(CommentRepository $commentRepository, $article)
+    {
+        $comments = $commentRepository->findBy([ 'article' => $article ]);
+
+        return $this->render('article/comment-list.html.twig', [
+            'comments' => $comments,
         ]);
     }
 }
