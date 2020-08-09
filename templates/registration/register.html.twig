@@ -1,0 +1,51 @@
+{% extends 'master/index.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <!-- ##### Register Form Area Start ##### -->
+    <div class="contact-area section-padding-0-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="contact-title">
+                        <h2>Register Here</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <div class="contact-form-area">
+                        {{ form_start(registrationForm) }} 
+                        {# <form method="post"> #}
+                            {% for flashError in app.flashes('verify_email_error') %}
+                                <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                            {% endfor %}
+                            <div class="row">
+                                <div class="col-12 col-lg-12">
+                                    {{ form_row(registrationForm.email) }}
+                                </div>
+                                <div class="col-12">
+				                    {{ form_row(registrationForm.plainPassword, {
+                                        label: 'Password'
+                                    }) }}
+                                </div>
+                                <div class="col-12">
+				                    {{ form_row(registrationForm.agreeTerms) }}
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button class="btn newspaper-btn mt-30 w-100" type="submit">Register</button>
+                                </div>
+                            </div>
+                        {{ form_end(registrationForm) }}
+                        {# </form> #}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- ##### Register Form Area End ##### -->
+
+{% endblock %}
