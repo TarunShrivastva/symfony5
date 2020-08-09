@@ -38,8 +38,8 @@ class Comment
     private $deleted_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="comments", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $article;
 
