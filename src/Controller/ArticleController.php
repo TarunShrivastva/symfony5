@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Comment;
 use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -27,9 +28,12 @@ class ArticleController extends AbstractController
 
     private $session;
 
-    public function __construct(SessionInterface $session)
+    private $params;
+
+    public function __construct(SessionInterface $session, ParameterBagInterface $params)
     {
         $this->session = $session;
+         $this->params = $params;
     }
 
     /**
@@ -45,10 +49,13 @@ class ArticleController extends AbstractController
         $locale = $request->getLocale();
         $request->setLocale($locale);
 
+        $rootDirectory = $this->params->get('kernel.project_dir');
+
         $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
 
         return $this->render('article/index.html.twig', [
-            'article' => $article
+            'article'   => $article,
+            'root_path' => $rootDirectory
         ]);
     }
 
