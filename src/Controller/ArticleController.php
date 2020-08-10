@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 // use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 // use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -52,7 +53,9 @@ class ArticleController extends AbstractController
         $rootDirectory = $this->params->get('kernel.project_dir');
 
         $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
-
+        if(empty($article)){
+            throw $this->createNotFoundException('The Article does not exist');
+        }
         return $this->render('article/index.html.twig', [
             'article'   => $article,
             'root_path' => $rootDirectory
